@@ -1,0 +1,34 @@
+
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd;
+    char buffer[100];
+
+    // Create and write to file
+    fd = open("sample.txt", O_CREAT | O_WRONLY, 0644);
+    write(fd, "Hello, World!\n", 14);
+    close(fd);
+
+    // Read from file
+    fd = open("sample.txt", O_RDONLY);
+    read(fd, buffer, sizeof(buffer));
+    printf("Data read from 'sample.txt':\n%s", buffer);
+    close(fd);
+
+    // Delete file
+    remove("sample.txt");
+    printf("File 'sample.txt' deleted.\n");
+
+    return 0;
+}
+
+output: File 'sample.txt' created successfully.
+File 'sample.txt' opened for writing.
+Data written to 'sample.txt'.
+File 'sample.txt' opened for reading.
+Data read from 'sample.txt':
+Hello, World!
+File 'sample.txt' deleted.
